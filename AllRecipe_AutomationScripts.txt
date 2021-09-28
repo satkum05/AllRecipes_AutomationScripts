@@ -1,0 +1,85 @@
+
+Test Scenarios:
+1. Launch the chrome browser 
+2. Navigate to the given URL="https://www.allrecipes.com/"
+3. Click Login
+4. Click Sign Up and register as new user
+5. Login with the created user credentials
+6. Enter a recipe name search field to search for the recipe
+7. Check the recipe is displayed is search result
+8. Navigate to My Settings by clicking My Account
+9. Create a new Collection
+8. Delete the collection
+=================================
+
+Automation Test Scripts: 
+
+//Launching Chrome browser
+WebDriver driver = new chromedriver();
+String BaseURL="https://www.allrecipes.com/ ";
+driver.geturl(BaseURL);
+Thread.sleep(5000);
+
+driver.manage().window().maximize();
+
+//Clicking login 
+driver.findElement(By.cssSelector("a#menu-link")).click();
+
+//Signing Up
+driver.findElement(By.Xpath("//*[contains(text(),'Sign Up')]")).click();
+driver.findElement(By.Xpath("//*[contains(text(),'Sign Up with Email')]")).click();
+
+driver.findElement(By.xpath("//input[@id='userSignupForm_email']")).sendKeys("sathishkumar.r@gmail.com");
+driver.findElement(By.xpath("//input[@id='userAccountForm_password']")).sendKeys("Qwerty@123");
+driver.findElement(By.xpath("//button[@id='userSignupForm_btnSignup']")).click();
+Thread.Sleep(2000);
+
+//User Login
+driver.findElement(By.Xpath("//*[contains(text(),'Sign In')]")).click();
+driver.findElement(By.Xpath("//*[contains(text(),'Sign In with Email')]")).click();
+
+//with incorrect email id
+driver.findElement(By.xpath("//input[@id='userSigninForm_email']")).sendKeys("sathishkumar.r@gmail.");
+driver.findElement(By.xpath("//input[@id='userSigninForm_password']")).sendKeys("Qwerty@123");
+driver.findElement(By.xpath("//button[@id='userSigninForm_btnSignup']")).click();
+Thread.Sleep(2000);
+
+//with incorrect password
+driver.findElement(By.xpath("//input[@id='userSigninForm_email']")).sendKeys("sathishkumar.r@gmail.com");
+driver.findElement(By.xpath("//input[@id='userSigninForm_password']")).sendKeys("Qwerty@12");
+driver.findElement(By.xpath("//button[@id='userSigninForm_btnSignup']")).click();
+Thread.Sleep(2000);
+
+//Correct email id and correct password
+driver.findElement(By.xpath("//input[@id='userSigninForm_email']")).sendKeys("sathishkumar.r@gmail.com");
+driver.findElement(By.xpath("//input[@id='userSigninForm_password']")).sendKeys("Qwerty@123");
+driver.findElement(By.xpath("//button[@id='userSigninForm_btnSignup']")).click();
+
+//Find A recipe
+driver.findElement(By.xpath(("//input[@id='searchText']")[0]).sendKeys("Heidi's Frying Pan Cookies");
+driver.findElement(By.xpath(("//button[@class='icon search js-activate duh']")[0]).click();
+
+webElement Search_recipe= driver.findElement(By.xpath(("//*[contains(text(),'Frying Pan Cookies')]")[13]);
+boolean present=Search_recipe.isDisplayed();
+System.out.println("Searched recipe is displayed");
+
+
+//Create Collection
+driver.findElement(By.xpath("//*[contains(text(),'Your Account')]")[0]).click();
+driver.findElement(By.xpath("//*[contains(text(),'My Settings')]")[0]).click();
+driver.findElement(By.xpath(("//*[contains(text(),'Create a collection')]")[0]).click();
+driver.findElement(By.xpath(("//input[@name='collectionName']")[0]).sendKeys("Beef Recipe Collection");
+driver.findElement(By.xpath(("//textarea[@name='description']")[0]).sendKeys("All type of beef recipes");
+driver.findElement(By.xpath("//button[@class='collection-submit-button']")).click();
+Thread.Sleep(2000);
+
+//Delete Collection
+driver.findElement(By.xpath(("//a[@class='btns-two-small collections-options']")[0]).click();
+driver.findElement(By.xpath(("//a[contains(text(),'Delete collection')]")[0]).click();
+driver.findElement(By.xpath(("//button[@class='ngdialog-button btns-two-small btn-gold']")[0]).click();
+Thread.Sleep(2000);
+
+
+=======================
+
+
